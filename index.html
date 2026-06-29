@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CLASSY — Barber & Academy Salon</title>
+<meta name="description" content="Classy Barber & Academy Salon — луксозен барбершоп и салон в София. Онлайн резервации.">
+<link rel="icon" type="image/webp" href="logo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C58A6E;
+    --gold-light: #E0AE98;
+    --gold-dark: #9C6650;
+    --cream: #FAF8F5;
+    --warm-white: #F5F2ED;
+    --charcoal: #1A1A18;
+    --mid-gray: #4A4A46;
+    --light-gray: #8A8A84;
+    --border: rgba(197,138,110,0.2);
+    --shadow: 0 20px 60px rgba(0,0,0,0.08);
+  }
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'Jost',sans-serif; background:var(--cream); color:var(--charcoal); overflow-x:hidden; }
+
+  /* ── LANG TOGGLE ── */
+  .lang-toggle { display:flex; border:1px solid var(--border); }
+  .lang-btn {
+    padding:0.4rem 0.9rem; font-family:'Jost',sans-serif;
+    font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase;
+    background:transparent; border:none; cursor:pointer;
+    color:var(--light-gray); transition:all .2s;
+  }
+  .lang-btn.active { background:var(--gold); color:var(--charcoal); }
+
+  /* ── NAV ── */
+  nav {
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:1.5rem 4rem;
+    background:rgba(250,248,245,0.94);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--border);
+    transition:padding .3s;
+  }
+  nav.scrolled { padding:1rem 4rem; }
+  .nav-logo { display:flex; flex-direction:column; align-items:center; text-decoration:none; }
+  .nav-logo .logo-word {
+    font-family:'Cormorant Garamond',serif; font-weight:500;
+    font-size:1.6rem; letter-spacing:0.35em; color:var(--gold); line-height:1;
+  }
+  .nav-logo .logo-sub {
+    font-weight:200; font-size:0.5rem; letter-spacing:0.3em;
+    color:var(--mid-gray); text-transform:uppercase;
+  }
+  .nav-links { display:flex; gap:2.5rem; list-style:none; }
+  .nav-links a {
+    font-weight:300; font-size:0.72rem; letter-spacing:0.2em;
+    text-transform:uppercase; text-decoration:none; color:var(--mid-gray);
+    transition:color .2s;
+  }
+  .nav-links a:hover { color:var(--gold); }
+  .nav-cta {
+    font-weight:400; font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase;
+    padding:0.75rem 1.8rem; border:1px solid var(--gold); color:var(--gold);
+    background:transparent; cursor:pointer; text-decoration:none; transition:all .3s;
+  }
+  .nav-cta:hover { background:var(--gold); color:var(--cream); }
+
+  /* ── HERO ── */
+  #hero { height:100vh; position:relative; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .hero-bg { position:absolute; inset:0; background:url('1.jpg') center/cover no-repeat; filter:brightness(0.18) saturate(0.7); }
+  .hero-overlay { position:absolute; inset:0; background:linear-gradient(135deg,rgba(8,7,6,0.72) 0%,rgba(25,20,12,0.5) 100%); }
+  .hero-content { position:relative; z-index:2; text-align:center; color:white; }
+  .hero-ornament { display:flex; align-items:center; gap:1.5rem; justify-content:center; margin-bottom:1.8rem; opacity:0; animation:fadeUp 1s ease 0.3s both; }
+  .hero-ornament .line { width:60px; height:1px; background:var(--gold); }
+  .hero-ornament span { font-size:0.58rem; letter-spacing:0.4em; text-transform:uppercase; color:var(--gold); font-weight:300; }
+  .hero-logo-img {
+    width:160px; height:160px; border-radius:50%;
+    background:rgba(255,255,255,0.95); border:2px solid rgba(197,138,110,0.5);
+    display:flex; align-items:center; justify-content:center;
+    margin:0 auto 1.5rem; opacity:0; animation:fadeUp 1s ease 0.1s both; overflow:hidden;
+  }
+  .hero-logo-img img { width:140px; height:140px; border-radius:50%; object-fit:contain; }
+  .hero-title {
+    font-family:'Cormorant Garamond',serif; font-size:clamp(5rem,12vw,11rem); font-weight:300;
+    letter-spacing:0.12em; line-height:0.9; color:var(--cream); opacity:0; animation:fadeUp 1s ease 0.5s both;
+  }
+  .hero-title .gold { color:var(--gold); }
+  .hero-subtitle { margin-top:1rem; font-weight:200; font-size:0.72rem; letter-spacing:0.5em; text-transform:uppercase; color:var(--gold-light); opacity:0; animation:fadeUp 1s ease 0.7s both; }
+  .hero-ctas { margin-top:3rem; display:flex; gap:1.5rem; justify-content:center; opacity:0; animation:fadeUp 1s ease 0.9s both; }
+  .btn-primary {
+    padding:1rem 2.5rem; background:var(--gold); color:var(--charcoal);
+    font-weight:400; font-size:0.68rem; letter-spacing:0.25em; text-transform:uppercase;
+    border:none; cursor:pointer; text-decoration:none; transition:all .3s; display:inline-block;
+  }
+  .btn-primary:hover { background:var(--gold-light); transform:translateY(-2px); }
+  .btn-outline {
+    padding:1rem 2.5rem; background:transparent; border:1px solid rgba(255,255,255,0.35); color:white;
+    font-weight:300; font-size:0.68rem; letter-spacing:0.25em; text-transform:uppercase;
+    cursor:pointer; text-decoration:none; transition:all .3s; display:inline-block;
+  }
+  .btn-outline:hover { border-color:var(--gold); color:var(--gold); }
+  .hero-scroll { position:absolute; bottom:2.5rem; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:0.5rem; opacity:0; animation:fadeUp 1s ease 1.2s both; }
+  .hero-scroll span { font-size:0.52rem; letter-spacing:0.4em; color:var(--gold); text-transform:uppercase; }
+  .scroll-line { width:1px; height:40px; background:var(--gold); animation:scrollDrop 2s ease infinite; }
+
+  /* ── SECTIONS ── */
+  section { padding:7rem 4rem; }
+  .section-label { display:flex; align-items:center; gap:1rem; margin-bottom:0.8rem; }
+  .section-label .s-line { width:30px; height:1px; background:var(--gold); }
+  .section-label span { font-size:0.58rem; letter-spacing:0.4em; text-transform:uppercase; color:var(--gold); font-weight:400; }
+  .section-title { font-family:'Cormorant Garamond',serif; font-size:clamp(2.4rem,5vw,3.8rem); font-weight:300; line-height:1.1; color:var(--charcoal); }
+
+  /* ── ABOUT ── */
+  #about { display:grid; grid-template-columns:1fr 1fr; gap:6rem; align-items:center; background:white; }
+  .about-images { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+  .about-images img { width:100%; aspect-ratio:3/4; object-fit:cover; display:block; }
+  .about-images img:first-child { margin-top:3rem; }
+  .about-text p { margin-top:1.5rem; font-weight:300; line-height:1.9; color:var(--mid-gray); font-size:0.94rem; }
+  .about-stats { display:flex; gap:3rem; margin-top:3rem; }
+  .stat { display:flex; flex-direction:column; }
+  .stat-num { font-family:'Cormorant Garamond',serif; font-size:3rem; font-weight:300; color:var(--gold); line-height:1; }
+  .stat-label { font-size:0.62rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--light-gray); margin-top:0.3rem; }
+
+  /* ── SERVICES ── */
+  #services { background:var(--warm-white); text-align:center; }
+  #services .section-label { justify-content:center; }
+  .services-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-top:4rem; background:var(--border); }
+  .service-card { background:white; padding:3rem 2.5rem; text-align:left; transition:all .3s; position:relative; overflow:hidden; }
+  .service-card::before { content:''; position:absolute; bottom:0; left:0; right:0; height:3px; background:var(--gold); transform:scaleX(0); transition:transform .3s; }
+  .service-card:hover::before { transform:scaleX(1); }
+  .service-card:hover { transform:translateY(-4px); box-shadow:var(--shadow); }
+  .service-icon { width:44px; height:44px; margin-bottom:1.5rem; color:var(--gold); }
+  .service-name { font-family:'Cormorant Garamond',serif; font-size:1.45rem; font-weight:400; color:var(--charcoal); margin-bottom:0.7rem; }
+  .service-desc { font-size:0.83rem; line-height:1.8; color:var(--light-gray); font-weight:300; }
+  .service-dur { margin-top:1.5rem; font-family:'Jost',sans-serif; font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); }
+
+  /* ── BOOKING (merged Barbers + Booking) ── */
+  #booking { background:var(--charcoal); color:white; text-align:center; }
+  #booking .section-label { justify-content:center; }
+  #booking .section-label span, #booking .s-line { color:var(--gold); background:var(--gold); }
+  #booking .section-title { color:white; }
+  .booking-intro { max-width:620px; margin:1.2rem auto 0; font-weight:300; line-height:1.8; color:var(--light-gray); font-size:0.9rem; }
+  .booking-container { max-width:920px; margin:3.5rem auto 0; background:rgba(255,255,255,0.04); border:1px solid rgba(197,138,110,0.2); padding:3rem; }
+  .booking-steps { display:flex; gap:0; margin-bottom:3rem; }
+  .step { flex:1; padding:1rem; text-align:center; font-size:0.62rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--light-gray); border-bottom:2px solid rgba(255,255,255,0.08); cursor:default; transition:all .3s; }
+  .step.active { color:var(--gold); border-bottom-color:var(--gold); }
+  .step-num { display:block; font-family:'Cormorant Garamond',serif; font-size:1.5rem; font-weight:300; margin-bottom:0.3rem; }
+  .step-panel { display:none; }
+  .step-panel.active { display:block; animation:fadeUp 0.4s ease; }
+
+  .barber-select-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; }
+  .barber-opt { padding:1.5rem 1rem; border:1px solid rgba(197,138,110,0.2); cursor:pointer; text-align:center; transition:all .3s; }
+  .barber-opt:hover, .barber-opt.selected { border-color:var(--gold); background:rgba(197,138,110,0.08); }
+  .barber-opt .b-initial { font-family:'Cormorant Garamond',serif; font-size:2.4rem; color:var(--gold); line-height:1; }
+  .barber-opt .b-name { font-size:0.95rem; margin-top:0.5rem; color:white; font-weight:400; }
+  .barber-opt .b-role { font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold-light); margin-top:0.35rem; }
+  .barber-opt .b-spec { font-size:0.66rem; color:var(--light-gray); margin-top:0.4rem; line-height:1.5; }
+  .barber-opt .b-badge { display:inline-block; margin-top:0.5rem; font-size:0.5rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--charcoal); background:var(--gold); padding:2px 8px; }
+
+  .service-select-list { display:flex; flex-direction:column; gap:0.5rem; }
+  .service-opt { display:flex; justify-content:space-between; align-items:center; padding:1rem 1.5rem; border:1px solid rgba(197,138,110,0.2); cursor:pointer; transition:all .3s; }
+  .service-opt:hover, .service-opt.selected { border-color:var(--gold); background:rgba(197,138,110,0.08); }
+  .service-opt .s-name { font-weight:300; color:white; font-size:0.9rem; text-align:left; }
+  .service-opt .s-dur { font-size:0.68rem; color:var(--light-gray); }
+
+  .calendar-wrapper { display:grid; grid-template-columns:1fr 1fr; gap:2rem; text-align:left; }
+  .cal-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; }
+  .cal-header .cal-month { font-family:'Cormorant Garamond',serif; font-size:1.3rem; color:white; }
+  .cal-nav { background:none; border:1px solid rgba(197,138,110,0.3); color:var(--gold); width:32px; height:32px; cursor:pointer; font-size:1rem; transition:all .2s; }
+  .cal-nav:hover { background:var(--gold); color:var(--charcoal); }
+  .cal-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:4px; }
+  .cal-day-name { text-align:center; font-size:0.52rem; letter-spacing:0.1em; color:var(--light-gray); padding-bottom:0.5rem; text-transform:uppercase; }
+  .cal-day { text-align:center; padding:0.5rem 0; font-size:0.8rem; color:rgba(255,255,255,0.25); cursor:default; }
+  .cal-day.available { color:white; cursor:pointer; border:1px solid transparent; transition:all .2s; }
+  .cal-day.available:hover { border-color:var(--gold); color:var(--gold); }
+  .cal-day.selected { background:var(--gold); color:var(--charcoal); border-color:var(--gold) !important; }
+  .cal-day.today { color:var(--gold); font-weight:500; }
+  .cal-day.past { color:rgba(255,255,255,0.15); cursor:not-allowed; }
+
+  .time-slots h4 { font-family:'Cormorant Garamond',serif; font-size:1.2rem; color:white; margin-bottom:1.5rem; display:flex; align-items:center; justify-content:space-between; gap:0.5rem; }
+  .btn-refresh { background:none; border:1px solid rgba(197,138,110,0.3); color:var(--gold); width:30px; height:30px; cursor:pointer; transition:all .2s; flex-shrink:0; }
+  .btn-refresh:hover { background:var(--gold); color:var(--charcoal); }
+  .slots-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0.4rem; }
+  .slot { padding:0.6rem; text-align:center; border:1px solid rgba(197,138,110,0.2); font-size:0.75rem; color:white; cursor:pointer; transition:all .2s; }
+  .slot:hover, .slot.selected { border-color:var(--gold); background:rgba(197,138,110,0.15); color:var(--gold); }
+  .slot.booked { opacity:0.25; cursor:not-allowed; background:rgba(255,255,255,0.02); pointer-events:none; }
+  .slots-msg { grid-column:1/-1; text-align:center; color:var(--light-gray); font-size:0.78rem; padding:1rem; font-weight:300; }
+
+  .confirm-form { display:grid; grid-template-columns:1fr 1fr; gap:1rem; text-align:left; }
+  .confirm-form .full { grid-column:1/-1; }
+  .form-group { display:flex; flex-direction:column; gap:0.5rem; }
+  .form-group label { font-size:0.58rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--light-gray); }
+  .form-group input, .form-group textarea { background:rgba(255,255,255,0.05); border:1px solid rgba(197,138,110,0.2); color:white; padding:0.9rem 1rem; font-family:'Jost',sans-serif; font-size:0.85rem; font-weight:300; outline:none; transition:border .2s; }
+  .form-group input:focus, .form-group textarea:focus { border-color:var(--gold); }
+  .form-group textarea { resize:none; min-height:80px; }
+  ::placeholder { color:rgba(255,255,255,0.25); }
+
+  .booking-summary { background:rgba(197,138,110,0.08); border:1px solid rgba(197,138,110,0.2); padding:1.5rem; margin-bottom:1.5rem; text-align:left; }
+  .booking-summary h4 { font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:var(--gold); margin-bottom:1rem; }
+  .summary-row { display:flex; justify-content:space-between; font-size:0.8rem; padding:0.35rem 0; border-bottom:1px solid rgba(255,255,255,0.05); }
+  .summary-row:last-child { border:none; }
+  .summary-row span:first-child { color:var(--light-gray); }
+  .summary-row span:last-child { color:white; }
+
+  .err-msg { background:rgba(180,80,60,0.12); border:1px solid rgba(180,80,60,0.35); color:#E0AE98; font-size:0.78rem; padding:0.8rem 1rem; margin-bottom:1rem; display:none; text-align:left; }
+
+  .step-nav { display:flex; justify-content:space-between; margin-top:2rem; }
+  .btn-step { padding:0.9rem 2rem; font-family:'Jost',sans-serif; font-size:0.62rem; letter-spacing:0.2em; text-transform:uppercase; cursor:pointer; transition:all .3s; border:none; }
+  .btn-step-back { background:transparent; border:1px solid rgba(255,255,255,0.15); color:var(--light-gray); }
+  .btn-step-back:hover { border-color:white; color:white; }
+  .btn-step-next { background:var(--gold); color:var(--charcoal); }
+  .btn-step-next:hover { background:var(--gold-light); }
+  .btn-step-next:disabled { opacity:0.35; cursor:not-allowed; }
+
+  /* ── GALLERY ── */
+  #gallery { background:var(--warm-white); padding:7rem 0; }
+  #gallery > .section-label, #gallery > .section-title { padding-left:4rem; }
+  .gallery-strip { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-top:3rem; padding:0 4rem; }
+  .gallery-item { aspect-ratio:4/3; overflow:hidden; }
+  .gallery-item img { width:100%; height:100%; object-fit:cover; transition:transform .6s ease; display:block; }
+  .gallery-item:hover img { transform:scale(1.05); }
+
+  /* ── LOCATION ── */
+  #location { background:white; display:grid; grid-template-columns:1fr 1fr; gap:0; padding:0; }
+  .location-info { padding:7rem 5rem; }
+  .location-info p { font-weight:300; line-height:1.9; color:var(--mid-gray); margin-top:1.5rem; }
+  .location-details { margin-top:2.5rem; display:flex; flex-direction:column; gap:1.2rem; }
+  .loc-row { display:flex; gap:1rem; align-items:flex-start; }
+  .loc-icon { color:var(--gold); margin-top:2px; flex-shrink:0; }
+  .loc-text { font-size:0.85rem; color:var(--mid-gray); font-weight:300; line-height:1.6; }
+  .loc-text strong { color:var(--charcoal); font-weight:400; display:block; font-size:0.62rem; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:0.2rem; }
+  .location-map { background:var(--warm-white); min-height:450px; overflow:hidden; position:relative; }
+  .location-map iframe { width:100%; height:100%; min-height:450px; border:none; display:block; }
+
+  /* ── FOOTER ── */
+  footer { background:var(--charcoal); color:white; padding:4rem; display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:3rem; }
+  .footer-brand .logo-word { font-family:'Cormorant Garamond',serif; font-size:2rem; color:var(--gold); letter-spacing:0.3em; }
+  .footer-brand .logo-sub { font-size:0.5rem; letter-spacing:0.3em; color:var(--light-gray); text-transform:uppercase; margin-top:0.2rem; }
+  .footer-brand p { margin-top:1rem; font-size:0.8rem; color:var(--light-gray); font-weight:300; line-height:1.8; }
+  .footer-col h4 { font-size:0.58rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--gold); margin-bottom:1.2rem; }
+  .footer-col ul { list-style:none; display:flex; flex-direction:column; gap:0.7rem; }
+  .footer-col ul li a { font-size:0.8rem; color:var(--light-gray); text-decoration:none; font-weight:300; transition:color .2s; }
+  .footer-col ul li a:hover { color:var(--gold); }
+  .footer-bottom { background:rgba(0,0,0,0.3); padding:1.2rem 4rem; display:flex; justify-content:space-between; align-items:center; }
+  .footer-bottom p { font-size:0.68rem; color:var(--light-gray); }
+
+  /* ── MODAL ── */
+  .modal-overlay { position:fixed; inset:0; z-index:300; background:rgba(10,9,8,0.82); backdrop-filter:blur(8px); display:none; align-items:center; justify-content:center; }
+  .modal-overlay.active { display:flex; }
+  .modal { background:white; max-width:520px; width:90%; padding:3rem; text-align:center; animation:fadeUp 0.4s ease; }
+  .modal svg { color:var(--gold); margin-bottom:1rem; }
+  .modal h3 { font-family:'Cormorant Garamond',serif; font-size:2rem; font-weight:300; color:var(--charcoal); }
+  .modal p { margin-top:1rem; font-size:0.85rem; color:var(--light-gray); font-weight:300; line-height:1.8; }
+  .modal .btn-primary { margin-top:2rem; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes scrollDrop { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width:960px) {
+    nav { padding:1.2rem 1.5rem; }
+    nav.scrolled { padding:0.8rem 1.5rem; }
+    .nav-links { display:none; }
+    section { padding:4rem 1.5rem; }
+    #about { grid-template-columns:1fr; gap:3rem; }
+    .services-grid { grid-template-columns:1fr; }
+    .barber-select-grid { grid-template-columns:1fr 1fr; }
+    .calendar-wrapper { grid-template-columns:1fr; }
+    .confirm-form { grid-template-columns:1fr; }
+    .confirm-form .full { grid-column:1; }
+    footer { grid-template-columns:1fr; gap:2rem; padding:3rem 1.5rem; }
+    .footer-bottom { padding:1rem 1.5rem; flex-direction:column; gap:0.5rem; text-align:center; }
+    #location { grid-template-columns:1fr; }
+    .location-info { padding:4rem 1.5rem; }
+    .gallery-strip { padding:0 1.5rem; }
+    .booking-container { padding:1.5rem; }
+    #gallery > .section-label, #gallery > .section-title { padding-left:1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#" class="nav-logo">
+    <span class="logo-word">CLASSY</span>
+    <span class="logo-sub">· Barber &amp; Academy Salon ·</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about" data-key="nav_about">За нас</a></li>
+    <li><a href="#services" data-key="nav_services">Услуги</a></li>
+    <li><a href="#booking" data-key="nav_barbers">Бръснари</a></li>
+    <li><a href="#gallery" data-key="nav_gallery">Галерия</a></li>
+    <li><a href="#location" data-key="nav_location">Локация</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:0.8rem;">
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('bg')" id="btn-bg">БГ</button>
+      <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
+    </div>
+    <a href="#booking" class="nav-cta" data-key="nav_book">Резервирай</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-logo-img">
+      <img src="Logo.jpg" alt="Classy Logo" style="mix-blend-mode:multiply;" onerror="this.src='logo.webp';this.style.mixBlendMode='normal';">
+    </div>
+    <div class="hero-ornament">
+      <div class="line"></div>
+      <span data-key="hero_est">Основана 2024 · София, България</span>
+      <div class="line"></div>
+    </div>
+    <h1 class="hero-title"><span class="gold">C</span>LASSY</h1>
+    <p class="hero-subtitle" data-key="hero_sub">Барбершоп &amp; Академия Салон</p>
+    <div class="hero-ctas">
+      <a href="#booking" class="btn-primary" data-key="hero_cta1">Запази час</a>
+      <a href="#services" class="btn-outline" data-key="hero_cta2">Нашите услуги</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span data-key="scroll">Скрол</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-images">
+    <img src="3.jpg" alt="Classy Salon Interior" onerror="this.style.display='none'">
+    <img src="2.jpg" alt="Classy Salon" onerror="this.style.display='none'">
+  </div>
+  <div class="about-text">
+    <div class="section-label"><div class="s-line"></div><span data-key="about_label">Нашата история</span></div>
+    <h2 class="section-title" data-key="about_title">Там където майсторството<br>среща <em>елегантността</em></h2>
+    <p data-key="about_p1">Classy Barber &amp; Beauty Salon е роден от една единствена визия — да създадем пространство, в което всеки клиент напуска не само с перфектен вид, но и с усещане за него. Съчетаваме традициите на класическото бръснарство с модерния стил.</p>
+    <p data-key="about_p2">Намиращ се в сърцето на София, нашият салон е убежище на изтънченост. Всяко подстригване, всяко бръснене, всяка процедура се извършва с изключително внимание към детайла от нашия екип от майстори.</p>
+    <div class="about-stats">
+      <div class="stat"><span class="stat-num">6</span><span class="stat-label" data-key="stat1">Майстори</span></div>
+      <div class="stat"><span class="stat-num">500+</span><span class="stat-label" data-key="stat2">Доволни клиенти</span></div>
+      <div class="stat"><span class="stat-num">5★</span><span class="stat-label" data-key="stat3">Рейтинг</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-label"><div class="s-line"></div><span data-key="services_label">Какво предлагаме</span></div>
+  <h2 class="section-title" data-key="services_title">Нашите услуги</h2>
+  <div class="services-grid">
+    <div class="service-card">
+      <svg class="service-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879M12 12L9.121 9.121m0 5.758a3 3 0 10-4.243 4.243 3 3 0 004.243-4.243zm0-5.758a3 3 0 10-4.243-4.243 3 3 0 004.243 4.243z"/></svg>
+      <div class="service-name" data-key="s1_name">Класическо подстригване</div>
+      <div class="service-desc" data-key="s1_desc">Безвременна прическа, адаптирана към формата на лицето и стила ви. Включва измиване, подстригване и оформяне с премиум продукти.</div>
+      <div class="service-dur" data-key="s1_dur">45 минути</div>
+    </div>
+    <div class="service-card">
+      <svg class="service-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+      <div class="service-name" data-key="s2_name">Оформяне на брада</div>
+      <div class="service-desc" data-key="s2_desc">Експертно оформяне, подстригване и горещо хавлиено третиране на брадата. Напуснете с брада, която перфектно оформя лицето ви.</div>
+      <div class="service-dur" data-key="s2_dur">30 минути</div>
+    </div>
+    <div class="service-card">
+      <svg class="service-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
+      <div class="service-name" data-key="s3_name">Боядисване на коса</div>
+      <div class="service-desc" data-key="s3_desc">От фини хайлайти до смели трансформации. Използваме професионална боя за трайни, ярки резултати.</div>
+      <div class="service-dur" data-key="s3_dur">60 минути</div>
+    </div>
+    <div class="service-card">
+      <svg class="service-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
+      <div class="service-name" data-key="s4_name">Детско подстригване</div>
+      <div class="service-desc" data-key="s4_desc">Внимателна и търпелива услуга за малките ни клиенти. Правим първите им посещения в барбершопа удобни и приятни.</div>
+      <div class="service-dur" data-key="s4_dur">30 минути</div>
+    </div>
+    <div class="service-card">
+      <svg class="service-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+      <div class="service-name" data-key="s5_name">Маникюр</div>
+      <div class="service-desc" data-key="s5_desc">Професионална грижа за ноктите и ръцете. Оформяне, полиране и поддръжка от наш специалист по маникюр.</div>
+      <div class="service-dur" data-key="s5_dur">45 минути</div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING (Barbers + Booking merged) -->
+<section id="booking">
+  <div class="section-label"><div class="s-line"></div><span data-key="book_label">Запознайте се с екипа · Резервации</span></div>
+  <h2 class="section-title" data-key="book_title">Запазете своя час</h2>
+  <p class="booking-intro" data-key="book_intro">Изберете своя майстор, услугата и удобен за вас час. Наличността е в реално време, синхронизирана с календара на всеки специалист.</p>
+
+  <div class="booking-container">
+    <div class="booking-steps">
+      <div class="step active" data-step="1"><span class="step-num">01</span><span data-key="step1">Бръснар</span></div>
+      <div class="step" data-step="2"><span class="step-num">02</span><span data-key="step2">Услуга</span></div>
+      <div class="step" data-step="3"><span class="step-num">03</span><span data-key="step3">Дата и час</span></div>
+      <div class="step" data-step="4"><span class="step-num">04</span><span data-key="step4">Потвърждение</span></div>
+    </div>
+
+    <!-- Step 1 — Barber -->
+    <div class="step-panel active" id="panel-1">
+      <div class="barber-select-grid" id="barber-select-grid"></div>
+      <div class="step-nav">
+        <span></span>
+        <button class="btn-step btn-step-next" onclick="goStep(2)" id="next-1" disabled data-key="btn_next">Напред →</button>
+      </div>
+    </div>
+
+    <!-- Step 2 — Service -->
+    <div class="step-panel" id="panel-2">
+      <div class="service-select-list" id="service-list"></div>
+      <div class="step-nav">
+        <button class="btn-step btn-step-back" onclick="goStep(1)" data-key="btn_back">← Назад</button>
+        <button class="btn-step btn-step-next" onclick="goStep(3)" id="next-2" disabled data-key="btn_next">Напред →</button>
+      </div>
+    </div>
+
+    <!-- Step 3 — Date & Time -->
+    <div class="step-panel" id="panel-3">
+      <div class="calendar-wrapper">
+        <div>
+          <div class="cal-header">
+            <button class="cal-nav" onclick="prevMonth()">‹</button>
+            <span class="cal-month" id="cal-title"></span>
+            <button class="cal-nav" onclick="nextMonth()">›</button>
+          </div>
+          <div class="cal-grid" id="cal-grid"></div>
+        </div>
+        <div class="time-slots">
+          <h4>
+            <span id="slots-title" data-key="slots_prompt">Първо изберете дата</span>
+            <button class="btn-refresh" id="btn-refresh" title="Обнови" onclick="reloadSlots()" style="display:none">↻</button>
+          </h4>
+          <div class="slots-grid" id="slots-grid"></div>
+        </div>
+      </div>
+      <div class="step-nav">
+        <button class="btn-step btn-step-back" onclick="goStep(2)" data-key="btn_back">← Назад</button>
+        <button class="btn-step btn-step-next" onclick="goStep(4)" id="next-3" disabled data-key="btn_next">Напред →</button>
+      </div>
+    </div>
+
+    <!-- Step 4 — Confirm -->
+    <div class="step-panel" id="panel-4">
+      <div class="booking-summary" id="booking-summary"></div>
+      <div class="err-msg" id="err-msg"></div>
+      <div class="confirm-form">
+        <div class="form-group">
+          <label data-key="f_fname">Име</label>
+          <input type="text" id="fname">
+        </div>
+        <div class="form-group">
+          <label data-key="f_lname">Фамилия</label>
+          <input type="text" id="lname">
+        </div>
+        <div class="form-group">
+          <label data-key="f_phone">Телефон</label>
+          <input type="tel" id="phone" placeholder="напр. 0884 255 778">
+        </div>
+        <div class="form-group">
+          <label data-key="f_email">Имейл (по желание)</label>
+          <input type="email" id="email">
+        </div>
+        <div class="form-group full">
+          <label data-key="f_notes">Бележки (по желание)</label>
+          <textarea id="notes"></textarea>
+        </div>
+      </div>
+      <div class="step-nav">
+        <button class="btn-step btn-step-back" onclick="goStep(3)" data-key="btn_back">← Назад</button>
+        <button class="btn-step btn-step-next" onclick="submitBooking()" id="btn-confirm" data-key="btn_confirm">Потвърди резервацията ✓</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="section-label"><div class="s-line"></div><span data-key="gallery_label">Пространството</span></div>
+  <h2 class="section-title" data-key="gallery_title">Нашият салон</h2>
+  <div class="gallery-strip">
+    <div class="gallery-item"><img src="3.jpg" alt="Classy - Barber Area" onerror="this.parentElement.style.display='none'"></div>
+    <div class="gallery-item"><img src="1.jpg" alt="Classy - Reception" onerror="this.parentElement.style.display='none'"></div>
+    <div class="gallery-item"><img src="2.jpg" alt="Classy - Products" onerror="this.parentElement.style.display='none'"></div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section id="location">
+  <div class="location-info">
+    <div class="section-label"><div class="s-line"></div><span data-key="loc_label">Намерете ни</span></div>
+    <h2 class="section-title" data-key="loc_title">Посетете салона</h2>
+    <p data-key="loc_desc">Намираме се удобно в центъра на София. Walk-in клиентите са добре дошли, но препоръчваме предварителна резервация, за да осигурите желания специалист и час.</p>
+    <div class="location-details">
+      <div class="loc-row">
+        <svg class="loc-icon" width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        <div class="loc-text">
+          <strong data-key="loc_addr_label">Адрес</strong>
+          <span data-key="loc_addr">ул. „Тинтява" 84, 1113 София</span>
+        </div>
+      </div>
+      <div class="loc-row">
+        <svg class="loc-icon" width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <div class="loc-text">
+          <strong data-key="loc_hours_label">Работно време</strong>
+          <span data-key="loc_hours">Пон – Пет: 09:00 – 20:00<br>Събота: 09:00 – 18:00<br>Неделя: Почивен ден</span>
+        </div>
+      </div>
+      <div class="loc-row">
+        <svg class="loc-icon" width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+        <div class="loc-text">
+          <strong data-key="loc_phone_label">Телефон</strong>
+          <span data-key="loc_phone">+359 · · · · · · · · ·<br><em style="color:var(--gold);font-style:normal;font-size:0.75rem">Обновете с вашия телефон</em></span>
+        </div>
+      </div>
+      <div class="loc-row">
+        <svg class="loc-icon" width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        <div class="loc-text">
+          <strong data-key="loc_email_label">Имейл</strong>
+          <span>info@classysalon.bg</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="location-map">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2932.1!2d23.3493594!3d42.6673803!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8b8988560e385cb1%3A0x8f90234252136a40!2sClassy%20Barber%20%26%20Academy%20Salon!5e0!3m2!1sbg!2sbg!4v1713000000000!5m2!1sbg!2sbg"
+      width="600" height="450" style="border:0;width:100%;height:100%;min-height:450px;display:block;"
+      allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <div class="logo-word">CLASSY</div>
+    <div class="logo-sub">· Barber &amp; Academy Salon ·</div>
+    <p data-key="footer_desc">Убежище на стила и изтънчеността в сърцето на София. Вярваме, че всеки клиент заслужава най-доброто изживяване при грижата за себе си.</p>
+  </div>
+  <div class="footer-col">
+    <h4 data-key="footer_nav">Навигация</h4>
+    <ul>
+      <li><a href="#about" data-key="nav_about">За нас</a></li>
+      <li><a href="#services" data-key="nav_services">Услуги</a></li>
+      <li><a href="#booking" data-key="nav_barbers">Бръснари</a></li>
+      <li><a href="#gallery" data-key="nav_gallery">Галерия</a></li>
+      <li><a href="#location" data-key="nav_location">Локация</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4 data-key="footer_services">Услуги</h4>
+    <ul>
+      <li><a href="#booking" data-key="s1_name">Класическо подстригване</a></li>
+      <li><a href="#booking" data-key="s2_name">Оформяне на брада</a></li>
+      <li><a href="#booking" data-key="s3_name">Боядисване на коса</a></li>
+      <li><a href="#booking" data-key="s4_name">Детско подстригване</a></li>
+      <li><a href="#booking" data-key="s5_name">Маникюр</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4 data-key="footer_follow">Последвайте ни</h4>
+    <ul>
+      <li><a href="#">Instagram</a></li>
+      <li><a href="#">Facebook</a></li>
+      <li><a href="#">TikTok</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <p data-key="copyright">© 2024 Classy Barber &amp; Beauty Salon. Всички права запазени.</p>
+  <p style="color:var(--gold)">Sofia, Bulgaria</p>
+</div>
+
+<!-- SUCCESS MODAL -->
+<div class="modal-overlay" id="successModal">
+  <div class="modal">
+    <svg width="56" height="56" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    <h3 data-key="modal_title">Резервацията е потвърдена!</h3>
+    <p id="modal-msg"></p>
+    <a href="#" class="btn-primary" onclick="closeModal()" data-key="modal_btn">Перфектно, Благодаря!</a>
+  </div>
+</div>
+
+<script>
+// ════════════════════════════════════════════════════════════════════
+// CONFIG — providers & services (frontend copy of lib/catalog.js)
+// Keep these IDs/slugs in sync with lib/catalog.js. The Cal.com event-type
+// slug for each service MUST match the `slug` value below.
+// ════════════════════════════════════════════════════════════════════
+const SERVICES = {
+  "classic-haircut": { bg:"Класическо подстригване", en:"Classic Haircut",  durBg:"45 мин", durEn:"45 min" },
+  "beard-grooming":  { bg:"Оформяне на брада",        en:"Beard Grooming",   durBg:"30 мин", durEn:"30 min" },
+  "hair-coloring":   { bg:"Боядисване на коса",       en:"Hair Coloring",    durBg:"60 мин", durEn:"60 min" },
+  "kids-haircut":    { bg:"Детско подстригване",      en:"Kids' Cut",        durBg:"30 мин", durEn:"30 min" },
+  "manicure":        { bg:"Маникюр",                  en:"Manicure",         durBg:"45 мин", durEn:"45 min" },
+};
+
+const BARBER_SVC = ["classic-haircut","beard-grooming","hair-coloring","kids-haircut"];
+
+// id = catalog barberId (sent to the Netlify functions). live=true means Cal.com
+// is configured; placeholders still work once their username + event types exist.
+const PROVIDERS = [
+  { id:"osman",   initial:"ОА", initialEn:"OA", bg:"Осман А.",    en:"Osman A.",    roleBg:"Майстор бръснар", roleEn:"Master Barber",  specBg:"Подстригване · Брада · Боядисване", specEn:"Haircut · Beard · Coloring", services:BARBER_SVC, live:true },
+  { id:"barber2", initial:"Б2", initialEn:"B2", bg:"Бръснар 2",   en:"Barber 2",    roleBg:"Майстор бръснар", roleEn:"Master Barber",  specBg:"Подстригване · Брада", specEn:"Haircut · Beard", services:BARBER_SVC, live:false },
+  { id:"barber3", initial:"Б3", initialEn:"B3", bg:"Бръснар 3",   en:"Barber 3",    roleBg:"Майстор бръснар", roleEn:"Master Barber",  specBg:"Подстригване · Брада", specEn:"Haircut · Beard", services:BARBER_SVC, live:false },
+  { id:"barber4", initial:"Б4", initialEn:"B4", bg:"Бръснар 4",   en:"Barber 4",    roleBg:"Майстор бръснар", roleEn:"Master Barber",  specBg:"Подстригване · Брада", specEn:"Haircut · Beard", services:BARBER_SVC, live:false },
+  { id:"barber5", initial:"Б5", initialEn:"B5", bg:"Бръснар 5",   en:"Barber 5",    roleBg:"Майстор бръснар", roleEn:"Master Barber",  specBg:"Подстригване · Брада", specEn:"Haircut · Beard", services:BARBER_SVC, live:false },
+  { id:"nails",   initial:"М",  initialEn:"N",  bg:"Маникюрист",  en:"Nail Specialist", roleBg:"Нокти & Маникюр", roleEn:"Nails & Manicure", specBg:"Маникюр", specEn:"Manicure", services:["manicure"], live:false },
+];
+
+// ════════════════════════════════════════════════════════════════════
+// TRANSLATIONS
+// ════════════════════════════════════════════════════════════════════
+const T = {
+  bg: {
+    nav_about:'За нас', nav_services:'Услуги', nav_barbers:'Бръснари',
+    nav_gallery:'Галерия', nav_location:'Локация', nav_book:'Резервирай',
+    hero_est:'Основана 2024 · София, България',
+    hero_sub:'Барбершоп & Академия Салон',
+    hero_cta1:'Запази час', hero_cta2:'Нашите услуги', scroll:'Скрол',
+    about_label:'Нашата история',
+    about_title:'Там където майсторството<br>среща <em>елегантността</em>',
+    about_p1:'Classy Barber & Beauty Salon е роден от една единствена визия — да създадем пространство, в което всеки клиент напуска не само с перфектен вид, но и с усещане за него. Съчетаваме традициите на класическото бръснарство с модерния стил.',
+    about_p2:'Намиращ се в сърцето на София, нашият салон е убежище на изтънченост. Всяко подстригване, всяко бръснене, всяка процедура се извършва с изключително внимание към детайла от нашия екип от майстори.',
+    stat1:'Майстори', stat2:'Доволни клиенти', stat3:'Рейтинг',
+    services_label:'Какво предлагаме', services_title:'Нашите услуги',
+    s1_name:'Класическо подстригване', s1_desc:'Безвременна прическа, адаптирана към формата на лицето и стила ви. Включва измиване, подстригване и оформяне с премиум продукти.', s1_dur:'45 минути',
+    s2_name:'Оформяне на брада', s2_desc:'Експертно оформяне, подстригване и горещо хавлиено третиране на брадата. Напуснете с брада, която перфектно оформя лицето ви.', s2_dur:'30 минути',
+    s3_name:'Боядисване на коса', s3_desc:'От фини хайлайти до смели трансформации. Използваме професионална боя за трайни, ярки резултати.', s3_dur:'60 минути',
+    s4_name:'Детско подстригване', s4_desc:'Внимателна и търпелива услуга за малките ни клиенти. Правим първите им посещения в барбершопа удобни и приятни.', s4_dur:'30 минути',
+    s5_name:'Маникюр', s5_desc:'Професионална грижа за ноктите и ръцете. Оформяне, полиране и поддръжка от наш специалист по маникюр.', s5_dur:'45 минути',
+    book_label:'Запознайте се с екипа · Резервации', book_title:'Запазете своя час',
+    book_intro:'Изберете своя майстор, услугата и удобен за вас час. Наличността е в реално време, синхронизирана с календара на всеки специалист.',
+    step1:'Бръснар', step2:'Услуга', step3:'Дата и час', step4:'Потвърждение',
+    btn_next:'Напред →', btn_back:'← Назад', btn_confirm:'Потвърди резервацията ✓',
+    slots_prompt:'Първо изберете дата', slots_loading:'Зарежда се...',
+    slots_none:'Няма свободни часове за тази дата. Изберете друг ден.',
+    slots_busy:'Системата е натоварена. Изчакайте момент и натиснете ↻',
+    f_fname:'Име', f_lname:'Фамилия', f_phone:'Телефон', f_email:'Имейл (по желание)', f_notes:'Бележки (по желание)',
+    sum_title:'Обобщение на резервацията',
+    sum_barber:'Бръснар', sum_service:'Услуга', sum_dur:'Продължителност', sum_date:'Дата', sum_time:'Час',
+    gallery_label:'Пространството', gallery_title:'Нашият салон',
+    loc_label:'Намерете ни', loc_title:'Посетете салона',
+    loc_desc:'Намираме се удобно в центъра на София. Walk-in клиентите са добре дошли, но препоръчваме предварителна резервация, за да осигурите желания специалист и час.',
+    loc_addr_label:'Адрес', loc_addr:'ул. „Тинтява" 84, 1113 София',
+    loc_hours_label:'Работно време', loc_hours:'Пон – Пет: 09:00 – 20:00<br>Събота: 09:00 – 18:00<br>Неделя: Почивен ден',
+    loc_phone_label:'Телефон', loc_phone:'+359 · · · · · · · · ·<br><em style="color:var(--gold);font-style:normal;font-size:0.75rem">Обновете с вашия телефон</em>',
+    loc_email_label:'Имейл',
+    footer_desc:'Убежище на стила и изтънчеността в сърцето на София. Вярваме, че всеки клиент заслужава най-доброто изживяване при грижата за себе си.',
+    footer_nav:'Навигация', footer_services:'Услуги', footer_follow:'Последвайте ни',
+    copyright:'© 2024 Classy Barber & Beauty Salon. Всички права запазени.',
+    modal_title:'Резервацията е потвърдена!', modal_btn:'Перфектно, Благодаря!',
+    modal_msg_tpl:'Здравей {name}! Резервацията ти при {barber} за {service} на {date} в {time} е потвърдена. Очакваме те в Classy!',
+    modal_msg_email:'Изпратихме потвърждение на {email}.',
+    months:['Януари','Февруари','Март','Април','Май','Юни','Юли','Август','Септември','Октомври','Ноември','Декември'],
+    days:['Пон','Вт','Ср','Чет','Пет','Съб','Нед'],
+    alert_fill:'Моля, въведете вашето име и телефонен номер.',
+    err_phone:'Невалиден телефонен номер.',
+    err_dup:'Вече има резервация с този телефон през последните 24 часа. Свържете се с нас за промяна.',
+    err_taken:'Този час вече е зает. Върнете се назад и изберете друг свободен час.',
+    err_generic:'Възникна грешка. Опитайте отново.'
+  },
+  en: {
+    nav_about:'About', nav_services:'Services', nav_barbers:'Barbers',
+    nav_gallery:'Gallery', nav_location:'Location', nav_book:'Book Now',
+    hero_est:'Est. 2024 · Sofia, Bulgaria',
+    hero_sub:'Barber & Academy Salon',
+    hero_cta1:'Reserve Your Chair', hero_cta2:'Our Services', scroll:'Scroll',
+    about_label:'Our Story',
+    about_title:'Where Craft Meets<br><em>Elegance</em>',
+    about_p1:'Classy Barber & Beauty Salon was born from a singular vision — to create a space where every client leaves not just looking their best, but feeling it. We blend old-world barbering traditions with contemporary style.',
+    about_p2:'Set in the heart of Sofia, our salon is a sanctuary of refinement. Every cut, every shave, every treatment is delivered with obsessive attention to detail by our team of masters.',
+    stat1:'Masters', stat2:'Happy Clients', stat3:'Rating',
+    services_label:'What We Offer', services_title:'Our Services',
+    s1_name:'Classic Haircut', s1_desc:'A timeless cut tailored to your face shape and style. Includes wash, cut and styling with premium products.', s1_dur:'45 minutes',
+    s2_name:'Beard Grooming', s2_desc:'Expert beard shaping, trimming and hot-towel treatment. Leave with a beard that frames your face perfectly.', s2_dur:'30 minutes',
+    s3_name:'Hair Coloring', s3_desc:'From subtle highlights to bold transformations. We use professional-grade color for lasting, vibrant results.', s3_dur:'60 minutes',
+    s4_name:"Kids' Cut", s4_desc:'A gentle, patient service for young clients. We make their first barbershop visits comfortable and fun.', s4_dur:'30 minutes',
+    s5_name:'Manicure', s5_desc:'Professional nail and hand care. Shaping, buffing and maintenance by our dedicated manicure specialist.', s5_dur:'45 minutes',
+    book_label:'Meet the Team · Reservations', book_title:'Book Your Appointment',
+    book_intro:'Choose your specialist, the service and a time that suits you. Availability is live, synced with each specialist’s calendar.',
+    step1:'Barber', step2:'Service', step3:'Date & Time', step4:'Confirm',
+    btn_next:'Next →', btn_back:'← Back', btn_confirm:'Confirm Booking ✓',
+    slots_prompt:'Select a date first', slots_loading:'Loading...',
+    slots_none:'No available times on this date. Please pick another day.',
+    slots_busy:'The system is busy. Please wait a moment and tap ↻',
+    f_fname:'First Name', f_lname:'Last Name', f_phone:'Phone', f_email:'Email (optional)', f_notes:'Notes (optional)',
+    sum_title:'Booking Summary',
+    sum_barber:'Barber', sum_service:'Service', sum_dur:'Duration', sum_date:'Date', sum_time:'Time',
+    gallery_label:'The Space', gallery_title:'Our Salon',
+    loc_label:'Find Us', loc_title:'Visit the Salon',
+    loc_desc:'We are conveniently located in central Sofia. Walk-ins are welcome, but we recommend booking in advance to secure your preferred specialist and time.',
+    loc_addr_label:'Address', loc_addr:'84 Tintava St, 1113 Sofia, Bulgaria',
+    loc_hours_label:'Working Hours', loc_hours:'Mon – Fri: 09:00 – 20:00<br>Sat: 09:00 – 18:00<br>Sun: Closed',
+    loc_phone_label:'Phone', loc_phone:'+359 · · · · · · · · ·<br><em style="color:var(--gold);font-style:normal;font-size:0.75rem">Update with your phone</em>',
+    loc_email_label:'Email',
+    footer_desc:'A sanctuary of style and refinement in the heart of Sofia. We believe every client deserves the finest grooming experience.',
+    footer_nav:'Navigate', footer_services:'Services', footer_follow:'Follow Us',
+    copyright:'© 2024 Classy Barber & Beauty Salon. All rights reserved.',
+    modal_title:'Booking Confirmed!', modal_btn:'Perfect, Thank You!',
+    modal_msg_tpl:'Hi {name}! Your appointment with {barber} for {service} on {date} at {time} is confirmed. See you at Classy!',
+    modal_msg_email:'We have sent a confirmation to {email}.',
+    months:['January','February','March','April','May','June','July','August','September','October','November','December'],
+    days:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+    alert_fill:'Please enter your name and phone number.',
+    err_phone:'Invalid phone number.',
+    err_dup:'A booking with this phone number already exists in the last 24 hours. Contact us to make a change.',
+    err_taken:'This time is already taken. Go back and choose another free time.',
+    err_generic:'Something went wrong. Please try again.'
+  }
+};
+
+let lang = 'bg';
+
+function setLang(l) {
+  lang = l;
+  document.getElementById('btn-bg').classList.toggle('active', l==='bg');
+  document.getElementById('btn-en').classList.toggle('active', l==='en');
+  document.documentElement.lang = l;
+  const t = T[l];
+  document.querySelectorAll('[data-key]').forEach(el => {
+    const key = el.getAttribute('data-key');
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+  renderBarbers();
+  if (booking.barberId) renderServices();
+  renderCalendar();
+  if (!booking.date) document.getElementById('slots-title').innerHTML = t.slots_prompt;
+}
+
+// ── NAV SCROLL ──
+window.addEventListener('scroll', () => {
+  document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// ════════════════════════════════════════════════════════════════════
+// BOOKING STATE
+// ════════════════════════════════════════════════════════════════════
+const booking = { barberId:'', barberName:'', serviceId:'', date:'', dateObj:null, slotIso:'' };
+let currentStep = 1;
+let calMonth = new Date().getMonth();
+let calYear = new Date().getFullYear();
+
+// ── STEP 1 — BARBERS ──
+function renderBarbers() {
+  const grid = document.getElementById('barber-select-grid');
+  grid.innerHTML = '';
+  PROVIDERS.forEach(p => {
+    const div = document.createElement('div');
+    div.className = 'barber-opt' + (booking.barberId === p.id ? ' selected' : '');
+    div.onclick = () => selectBarber(p.id);
+    div.innerHTML =
+      `<div class="b-initial">${lang==='bg'?p.initial:p.initialEn}</div>` +
+      `<div class="b-name">${lang==='bg'?p.bg:p.en}</div>` +
+      `<div class="b-role">${lang==='bg'?p.roleBg:p.roleEn}</div>` +
+      `<div class="b-spec">${lang==='bg'?p.specBg:p.specEn}</div>`;
+    grid.appendChild(div);
+  });
+}
+
+function selectBarber(id) {
+  const p = PROVIDERS.find(x => x.id === id);
+  booking.barberId = id;
+  booking.barberName = lang==='bg' ? p.bg : p.en;
+  // reset downstream choices
+  booking.serviceId = ''; booking.date=''; booking.dateObj=null; booking.slotIso='';
+  document.getElementById('next-2').disabled = true;
+  document.getElementById('next-3').disabled = true;
+  renderBarbers();
+  renderServices();
+  document.getElementById('next-1').disabled = false;
+}
+
+// ── STEP 2 — SERVICES (filtered per barber) ──
+function renderServices() {
+  const list = document.getElementById('service-list');
+  list.innerHTML = '';
+  const p = PROVIDERS.find(x => x.id === booking.barberId);
+  if (!p) return;
+  p.services.forEach(sid => {
+    const s = SERVICES[sid];
+    const div = document.createElement('div');
+    div.className = 'service-opt' + (booking.serviceId === sid ? ' selected' : '');
+    div.onclick = () => selectService(sid);
+    div.innerHTML =
+      `<span class="s-name">${lang==='bg'?s.bg:s.en}</span>` +
+      `<span class="s-dur">${lang==='bg'?s.durBg:s.durEn}</span>`;
+    list.appendChild(div);
+  });
+}
+
+function selectService(sid) {
+  booking.serviceId = sid;
+  booking.date=''; booking.dateObj=null; booking.slotIso='';
+  document.getElementById('next-3').disabled = true;
+  renderServices();
+  document.getElementById('next-2').disabled = false;
+}
+
+// ── STEP NAV ──
+function goStep(n) {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+  document.querySelector(`.step[data-step="${n}"]`).classList.add('active');
+  document.getElementById(`panel-${n}`).classList.add('active');
+  currentStep = n;
+  if (n===3) renderCalendar();
+  if (n===4) renderSummary();
+}
+
+// ── CALENDAR ──
+function renderCalendar() {
+  const t = T[lang];
+  document.getElementById('cal-title').textContent = `${t.months[calMonth]} ${calYear}`;
+  const grid = document.getElementById('cal-grid');
+  grid.innerHTML = '';
+  t.days.forEach(d => { const el=document.createElement('div'); el.className='cal-day-name'; el.textContent=d; grid.appendChild(el); });
+  const firstDay = new Date(calYear, calMonth, 1).getDay();
+  const days = new Date(calYear, calMonth+1, 0).getDate();
+  const offset = (firstDay+6)%7;
+  const today = new Date(); today.setHours(0,0,0,0);
+  for(let i=0;i<offset;i++){ const el=document.createElement('div'); el.className='cal-day'; grid.appendChild(el); }
+  for(let d=1; d<=days; d++){
+    const el=document.createElement('div');
+    const date=new Date(calYear,calMonth,d);
+    const isSun=date.getDay()===0;
+    const isPast=date<today;
+    el.textContent=d;
+    if(isPast||isSun){ el.className='cal-day past'; }
+    else {
+      el.className='cal-day available';
+      const ds=`${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+      if(date.toDateString()===today.toDateString()) el.classList.add('today');
+      if(booking.date===ds) el.classList.add('selected');
+      el.onclick=()=>selectDate(el,date,ds);
+    }
+    grid.appendChild(el);
+  }
+}
+
+function selectDate(el, date, ds) {
+  document.querySelectorAll('.cal-day').forEach(d=>d.classList.remove('selected'));
+  el.classList.add('selected');
+  booking.date=ds; booking.dateObj=date; booking.slotIso='';
+  document.getElementById('next-3').disabled=true;
+  loadSlots();
+}
+
+function reloadSlots(){ if(booking.date) loadSlots(); }
+
+async function loadSlots() {
+  const t=T[lang];
+  const grid=document.getElementById('slots-grid');
+  const title=document.getElementById('slots-title');
+  const refresh=document.getElementById('btn-refresh');
+  refresh.style.display='inline-block';
+  const d=booking.dateObj;
+  title.textContent=`${d.getDate()} ${t.months[d.getMonth()]}`;
+  grid.innerHTML=`<div class="slots-msg">${t.slots_loading}</div>`;
+
+  try {
+    const url=`/.netlify/functions/availability?barberId=${encodeURIComponent(booking.barberId)}&serviceId=${encodeURIComponent(booking.serviceId)}&date=${booking.date}&_t=${Date.now()}`;
+    const res=await fetch(url,{cache:'no-store'});
+    if(res.status===429){ grid.innerHTML=`<div class="slots-msg">${t.slots_busy}</div>`; return; }
+    const data=await res.json();
+    if(!res.ok) throw new Error(data.error||`Server ${res.status}`);
+    buildSlots(data.slots||[]);
+  } catch(e) {
+    grid.innerHTML=`<div class="slots-msg">⚠ ${e.message}</div>`;
+  }
+}
+
+function buildSlots(slots) {
+  const t=T[lang];
+  const grid=document.getElementById('slots-grid');
+  grid.innerHTML='';
+  if(!slots.length){ grid.innerHTML=`<div class="slots-msg">${t.slots_none}</div>`; return; }
+  slots.forEach(iso=>{
+    const el=document.createElement('div');
+    el.className='slot';
+    el.textContent=toSofiaTime(iso);
+    el.dataset.iso=iso;
+    el.onclick=()=>{
+      document.querySelectorAll('.slot').forEach(s=>s.classList.remove('selected'));
+      el.classList.add('selected');
+      booking.slotIso=iso;
+      document.getElementById('next-3').disabled=false;
+    };
+    grid.appendChild(el);
+  });
+}
+
+function toSofiaTime(iso){
+  return new Date(iso).toLocaleTimeString('bg-BG',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Sofia'});
+}
+
+function prevMonth(){ if(calMonth===0){calMonth=11;calYear--;}else calMonth--; renderCalendar(); }
+function nextMonth(){ if(calMonth===11){calMonth=0;calYear++;}else calMonth++; renderCalendar(); }
+
+// ── SUMMARY ──
+function renderSummary(){
+  const t=T[lang];
+  const s=SERVICES[booking.serviceId];
+  const dateStr=booking.dateObj.toLocaleDateString(lang==='bg'?'bg-BG':'en-GB',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  document.getElementById('booking-summary').innerHTML=`
+    <h4>${t.sum_title}</h4>
+    <div class="summary-row"><span>${t.sum_barber}</span><span>${booking.barberName}</span></div>
+    <div class="summary-row"><span>${t.sum_service}</span><span>${lang==='bg'?s.bg:s.en}</span></div>
+    <div class="summary-row"><span>${t.sum_dur}</span><span>${lang==='bg'?s.durBg:s.durEn}</span></div>
+    <div class="summary-row"><span>${t.sum_date}</span><span>${dateStr}</span></div>
+    <div class="summary-row"><span>${t.sum_time}</span><span>${toSofiaTime(booking.slotIso)}</span></div>
+  `;
+}
+
+// ── SUBMIT (real Cal.com booking) ──
+async function submitBooking(){
+  const t=T[lang];
+  const fname=document.getElementById('fname').value.trim();
+  const lname=document.getElementById('lname').value.trim();
+  const phone=document.getElementById('phone').value.trim();
+  const email=document.getElementById('email').value.trim();
+  const errEl=document.getElementById('err-msg');
+  const btn=document.getElementById('btn-confirm');
+  errEl.style.display='none';
+
+  if(!fname||!phone){ errEl.textContent=t.alert_fill; errEl.style.display='block'; return; }
+
+  const fullName=lname?`${fname} ${lname}`:fname;
+  btn.disabled=true;
+  const orig=btn.textContent;
+  btn.textContent=lang==='bg'?'Резервиране…':'Booking…';
+
+  try {
+    const res=await fetch('/.netlify/functions/book',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        barberId:booking.barberId,
+        serviceId:booking.serviceId,
+        startTime:booking.slotIso,
+        name:fullName,
+        phone, email,
+        language:lang
+      })
+    });
+    const data=await res.json().catch(()=>({}));
+
+    if(res.status===429){
+      errEl.textContent = data.error==='duplicate_phone' ? t.err_dup : t.slots_busy;
+      errEl.style.display='block'; btn.disabled=false; btn.textContent=orig; return;
+    }
+    if(res.status===409){
+      errEl.textContent=t.err_taken; errEl.style.display='block';
+      btn.disabled=false; btn.textContent=orig; booking.slotIso=''; return;
+    }
+    if(!res.ok) throw new Error(data.error||t.err_generic);
+
+    // Success
+    const s=SERVICES[booking.serviceId];
+    let msg=t.modal_msg_tpl
+      .replace('{name}',fname)
+      .replace('{barber}',booking.barberName)
+      .replace('{service}',lang==='bg'?s.bg:s.en)
+      .replace('{date}',booking.date)
+      .replace('{time}',toSofiaTime(booking.slotIso));
+    if(email) msg+=' '+t.modal_msg_email.replace('{email}',email);
+    document.querySelector('#successModal h3').innerHTML=t.modal_title;
+    document.querySelector('#successModal .btn-primary').innerHTML=t.modal_btn;
+    document.getElementById('modal-msg').textContent=msg;
+    document.getElementById('successModal').classList.add('active');
+    btn.textContent=orig;
+  } catch(err){
+    errEl.textContent='⚠ '+(err.message||t.err_generic);
+    errEl.style.display='block';
+    btn.disabled=false; btn.textContent=orig;
+  }
+}
+
+function closeModal(){
+  document.getElementById('successModal').classList.remove('active');
+  booking.barberId='';booking.barberName='';booking.serviceId='';booking.date='';booking.dateObj=null;booking.slotIso='';
+  ['next-1','next-2','next-3'].forEach(id=>document.getElementById(id).disabled=true);
+  ['fname','lname','phone','email','notes'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('btn-confirm').disabled=false;
+  document.getElementById('err-msg').style.display='none';
+  document.getElementById('slots-grid').innerHTML='';
+  document.getElementById('slots-title').innerHTML=T[lang].slots_prompt;
+  document.getElementById('btn-refresh').style.display='none';
+  renderServices();
+  goStep(1);
+  return false;
+}
+
+document.getElementById('successModal').addEventListener('click',function(e){ if(e.target===this) closeModal(); });
+
+// ── INIT ──
+renderBarbers();
+renderCalendar();
+</script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "name": "classy-barbershop-booking",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Classy Barber online booking — Cal.com backend with Netlify Functions",
+  "dependencies": {
+    "@netlify/blobs": "^8.1.0"
+  }
+}
