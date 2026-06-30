@@ -2,7 +2,7 @@
 
 This is the **full Classy site** (landing page + online booking) using the same
 Cal.com booking engine as the Osman test site. One page, one booking widget,
-six providers.
+six barber providers.
 
 ---
 
@@ -32,17 +32,17 @@ Netlify → Site settings → Environment variables → Add `CAL_API_KEY`.
 
 ## 2. Barbers / providers — `lib/catalog.js` AND `index.html`
 
-There are **6 providers**. Only **Osman** is live right now; the rest are
+There are **6 barbers**. Only **Osman** is live right now; the rest are
 placeholders until their Cal.com accounts exist.
 
-| id        | shown as       | Cal.com username | live? |
-|-----------|----------------|------------------|-------|
-| `osman`   | Осман А.       | `osman-classy`   | ✅ yes |
-| `barber2` | Бръснар 2      | `barber2-classy` | ⬜ placeholder |
-| `barber3` | Бръснар 3      | `barber3-classy` | ⬜ placeholder |
-| `barber4` | Бръснар 4      | `barber4-classy` | ⬜ placeholder |
-| `barber5` | Бръснар 5      | `barber5-classy` | ⬜ placeholder |
-| `nails`   | Маникюрист     | `nails-classy`   | ⬜ placeholder (Manicure only) |
+| id        | shown as   | role          | Cal.com username | live? |
+|-----------|------------|---------------|------------------|-------|
+| `osman`   | Осман А.   | Master Barber | `osman-classy`   | ✅ yes |
+| `barber2` | Бръснар 2  | Master Barber | `barber2-classy` | ⬜ placeholder |
+| `barber3` | Бръснар 3  | Barber        | `barber3-classy` | ⬜ placeholder |
+| `barber4` | Бръснар 4  | Barber        | `barber4-classy` | ⬜ placeholder |
+| `barber5` | Бръснар 5  | Barber        | `barber5-classy` | ⬜ placeholder |
+| `barber6` | Бръснар 6  | Barber        | `barber6-classy` | ⬜ placeholder |
 
 To activate a barber after you create their Cal.com account:
 
@@ -58,8 +58,10 @@ To activate a barber after you create their Cal.com account:
 
 ## 3. Services — `lib/catalog.js` AND `index.html`
 
-Five services. Each service's `slug` **must exactly match the Cal.com event-type
-slug** (`cal.com/<username>/<slug>`):
+### Bookable services (4 — available for online booking)
+
+Each service's `slug` **must exactly match the Cal.com event-type slug**
+(`cal.com/<username>/<slug>`):
 
 | slug              | service (BG)             | duration |
 |-------------------|--------------------------|----------|
@@ -67,15 +69,17 @@ slug** (`cal.com/<username>/<slug>`):
 | `beard-grooming`  | Оформяне на брада        | 30 min |
 | `hair-coloring`   | Боядисване на коса       | 60 min |
 | `kids-haircut`    | Детско подстригване      | 30 min |
-| `manicure`        | Маникюр                  | 45 min |
 
-- The 5 barbers offer the first four. The **Маникюрист** offers only `manicure`.
-- Edit who offers what in the `services:[...]` array of each provider
-  (both `lib/catalog.js` and the `PROVIDERS` array in `index.html`).
-- **Prices are intentionally not shown** anywhere on the site.
+All 6 barbers offer all four services.
 
-> Each barber needs an event type with the matching slug in their own Cal.com
-> account for booking to work for that service.
+### Marketing-only service (1 — visible but NOT bookable online)
+
+| service  | shown as | notes |
+|----------|----------|-------|
+| Manicure | Маникюр  | Visible in the Services section with "In salon only / By request" badge. Not selectable in the booking flow. |
+
+**Do not add manicure to `lib/catalog.js` or to any barber's `services` array.**
+The service card is static HTML in the `#services` section of `index.html`.
 
 ---
 
@@ -83,11 +87,12 @@ slug** (`cal.com/<username>/<slug>`):
 
 The page expects these image files in the repo root (drop them in):
 
-- `Logo.jpg` — the Classy logo (shown in the hero). If missing, it falls back to `logo.webp`.
+- `logo.png` — the Classy logo shown top-left in the navbar.
+- `logo.webp` — favicon (already included).
 - `1.jpg`, `2.jpg`, `3.jpg` — salon photos (hero background, about, gallery).
 
 Missing photos are hidden automatically, so the site still works without them —
-but add them for the full look. `logo.webp` is already included and used as the favicon.
+but add them for the full look.
 
 ---
 

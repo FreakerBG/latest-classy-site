@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="bg">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CLASSY — Barber & Academy Salon</title>
 <meta name="description" content="Classy Barber & Academy Salon — луксозен барбершоп и салон в София. Онлайн резервации.">
-<link rel="icon" type="image/webp" href="logo.webp">
+<link rel="icon" type="image/png" href="logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -21,7 +21,7 @@
     --border: rgba(197,138,110,0.2);
     --shadow: 0 20px 60px rgba(0,0,0,0.08);
   }
-  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
   html { scroll-behavior:smooth; }
   body { font-family:'Jost',sans-serif; background:var(--cream); color:var(--charcoal); overflow-x:hidden; }
 
@@ -39,22 +39,15 @@
   nav {
     position:fixed; top:0; left:0; right:0; z-index:100;
     display:flex; align-items:center; justify-content:space-between;
-    padding:1.5rem 4rem;
-    background:rgba(250,248,245,0.94);
-    backdrop-filter:blur(14px);
+    padding:clamp(0.7rem,1.4vw,1.15rem) clamp(1rem,4vw,4rem);
+    background:#fff;
     border-bottom:1px solid var(--border);
     transition:padding .3s;
   }
-  nav.scrolled { padding:1rem 4rem; }
-  .nav-logo { display:flex; flex-direction:column; align-items:center; text-decoration:none; }
-  .nav-logo .logo-word {
-    font-family:'Cormorant Garamond',serif; font-weight:500;
-    font-size:1.6rem; letter-spacing:0.35em; color:var(--gold); line-height:1;
-  }
-  .nav-logo .logo-sub {
-    font-weight:200; font-size:0.5rem; letter-spacing:0.3em;
-    color:var(--mid-gray); text-transform:uppercase;
-  }
+  nav.scrolled { padding:clamp(0.55rem,1vw,0.85rem) clamp(1rem,4vw,4rem); }
+  .nav-logo { display:flex; align-items:center; flex-shrink:0; text-decoration:none; }
+  .nav-logo img { height:clamp(48px,5vw,68px); width:auto; max-width:clamp(180px,24vw,310px); display:block; object-fit:contain; }
+  nav.scrolled .nav-logo img { height:clamp(42px,4vw,58px); }
   .nav-links { display:flex; gap:2.5rem; list-style:none; }
   .nav-links a {
     font-weight:300; font-size:0.72rem; letter-spacing:0.2em;
@@ -71,7 +64,7 @@
 
   /* ── HERO ── */
   #hero { height:100vh; position:relative; display:flex; align-items:center; justify-content:center; overflow:hidden; }
-  .hero-bg { position:absolute; inset:0; background:url('1.jpg') center/cover no-repeat; filter:brightness(0.18) saturate(0.7); }
+  .hero-bg { position:absolute; inset:0; background:url('1.jpg') center/cover no-repeat; filter:brightness(0.45) saturate(0.85); }
   .hero-overlay { position:absolute; inset:0; background:linear-gradient(135deg,rgba(8,7,6,0.72) 0%,rgba(25,20,12,0.5) 100%); }
   .hero-content { position:relative; z-index:2; text-align:center; color:white; }
   .hero-ornament { display:flex; align-items:center; gap:1.5rem; justify-content:center; margin-bottom:1.8rem; opacity:0; animation:fadeUp 1s ease 0.3s both; }
@@ -87,6 +80,7 @@
   .hero-title {
     font-family:'Cormorant Garamond',serif; font-size:clamp(5rem,12vw,11rem); font-weight:300;
     letter-spacing:0.12em; line-height:0.9; color:var(--cream); opacity:0; animation:fadeUp 1s ease 0.5s both;
+    text-shadow: 0 0 40px rgba(255,245,225,0.25), 0 0 90px rgba(197,138,110,0.18), 0 0 160px rgba(197,138,110,0.1);
   }
   .hero-title .gold { color:var(--gold); }
   .hero-subtitle { margin-top:1rem; font-weight:200; font-size:0.72rem; letter-spacing:0.5em; text-transform:uppercase; color:var(--gold-light); opacity:0; animation:fadeUp 1s ease 0.7s both; }
@@ -128,15 +122,17 @@
   /* ── SERVICES ── */
   #services { background:var(--warm-white); text-align:center; }
   #services .section-label { justify-content:center; }
-  .services-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-top:4rem; background:var(--border); }
-  .service-card { background:white; padding:3rem 2.5rem; text-align:left; transition:all .3s; position:relative; overflow:hidden; }
+  .services-grid { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:1rem; max-width:1180px; margin:4rem auto 0; background:transparent; }
+  .service-card { grid-column:span 2; background:#fff; border:1px solid var(--border); padding:3rem 2.5rem; text-align:left; transition:all .3s; position:relative; overflow:hidden; }
+  .service-card:nth-child(4) { grid-column:2 / span 2; }
+  .service-card:nth-child(5) { grid-column:4 / span 2; }
   .service-card::before { content:''; position:absolute; bottom:0; left:0; right:0; height:3px; background:var(--gold); transform:scaleX(0); transition:transform .3s; }
   .service-card:hover::before { transform:scaleX(1); }
   .service-card:hover { transform:translateY(-4px); box-shadow:var(--shadow); }
   .service-icon { width:44px; height:44px; margin-bottom:1.5rem; color:var(--gold); }
   .service-name { font-family:'Cormorant Garamond',serif; font-size:1.45rem; font-weight:400; color:var(--charcoal); margin-bottom:0.7rem; }
   .service-desc { font-size:0.83rem; line-height:1.8; color:var(--light-gray); font-weight:300; }
-  .service-dur { margin-top:1.5rem; font-family:'Jost',sans-serif; font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); }
+  .service-badge { display:inline-block; margin-top:1.2rem; font-size:0.58rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); border:1px solid var(--border); padding:0.3rem 0.8rem; }
 
   /* ── BOOKING (merged Barbers + Booking) ── */
   #booking { background:var(--charcoal); color:white; text-align:center; }
@@ -261,14 +257,34 @@
   @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
   @keyframes scrollDrop { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
 
+  /* ── HAMBURGER ── */
+  .hamburger { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:8px; flex-shrink:0; touch-action:manipulation; }
+  .hamburger span { width:22px; height:1.5px; background:var(--charcoal); display:block; transition:all .3s; }
+  nav.menu-open .hamburger span:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
+  nav.menu-open .hamburger span:nth-child(2) { opacity:0; }
+  nav.menu-open .hamburger span:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); }
+
+  /* ── MOBILE NAV OVERLAY ── */
+  .mobile-nav { display:none; position:fixed; inset:0; z-index:98; background:var(--cream); flex-direction:column; align-items:center; justify-content:center; gap:2.2rem; padding:2rem; }
+  .mobile-nav.active { display:flex; animation:fadeUp .25s ease; }
+  .mobile-nav a { font-family:'Cormorant Garamond',serif; font-size:1.9rem; letter-spacing:0.08em; text-decoration:none; color:var(--charcoal); font-weight:300; transition:color .2s; }
+  .mobile-nav a:active { color:var(--gold); }
+  .mobile-nav .mobile-book { padding:0.85rem 2.5rem; background:var(--gold); color:var(--charcoal); font-family:'Jost',sans-serif; font-size:0.7rem; letter-spacing:0.25em; text-transform:uppercase; font-weight:400; margin-top:0.3rem; }
+
   /* ── RESPONSIVE ── */
   @media (max-width:960px) {
-    nav { padding:1.2rem 1.5rem; }
-    nav.scrolled { padding:0.8rem 1.5rem; }
+    .hamburger { display:flex; }
     .nav-links { display:none; }
+    .nav-logo img { height:clamp(42px,8vw,56px); max-width:clamp(155px,42vw,230px); }
     section { padding:4rem 1.5rem; }
     #about { grid-template-columns:1fr; gap:3rem; }
-    .services-grid { grid-template-columns:1fr; }
+    .about-images img:first-child { margin-top:0; }
+    .services-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:0.75rem; }
+    .service-card,
+    .service-card:nth-child(4),
+    .service-card:nth-child(5) { grid-column:auto; }
+    .service-card { padding:2rem 1.5rem; }
+    .step { padding:0.75rem 0.4rem; font-size:0.58rem; }
     .barber-select-grid { grid-template-columns:1fr 1fr; }
     .calendar-wrapper { grid-template-columns:1fr; }
     .confirm-form { grid-template-columns:1fr; }
@@ -277,9 +293,52 @@
     .footer-bottom { padding:1rem 1.5rem; flex-direction:column; gap:0.5rem; text-align:center; }
     #location { grid-template-columns:1fr; }
     .location-info { padding:4rem 1.5rem; }
-    .gallery-strip { padding:0 1.5rem; }
+    .location-map { min-height:320px; }
+    .location-map iframe { min-height:320px; }
+    .gallery-strip { padding:0 1.5rem; grid-template-columns:1fr 1fr; }
     .booking-container { padding:1.5rem; }
     #gallery > .section-label, #gallery > .section-title { padding-left:1.5rem; }
+    .hero-logo-img { width:130px; height:130px; }
+    .hero-logo-img img { width:110px; height:110px; }
+  }
+  @media (max-width:640px) {
+    .nav-cta { display:none; }
+  }
+  @media (max-width:600px) {
+    .services-grid { grid-template-columns:1fr; }
+    .service-card { padding:1.8rem 1.2rem; }
+    .nav-logo img { height:clamp(36px,10vw,48px); max-width:clamp(135px,48vw,190px); }
+    nav { gap:0.5rem; }
+    .hero-subtitle { letter-spacing:0.2em; font-size:0.68rem; }
+    .hero-ctas { flex-direction:column; align-items:center; gap:1rem; }
+    .hero-ctas .btn-primary, .hero-ctas .btn-outline { width:100%; max-width:260px; text-align:center; padding:0.9rem 1.5rem; }
+    .hero-logo-img { width:110px; height:110px; }
+    .hero-logo-img img { width:90px; height:90px; }
+    .about-stats { gap:1.5rem; }
+    .stat-num { font-size:2.5rem; }
+    .booking-steps .step > span:last-child { display:none; }
+    .step { padding:0.85rem 0.5rem; }
+    .step-num { font-size:1.2rem; margin-bottom:0; }
+    .barber-opt { padding:1.2rem 0.75rem; }
+    .cal-day { padding:0.65rem 0; }
+    .slot { padding:0.8rem 0.3rem; }
+    .slots-grid { grid-template-columns:repeat(3,1fr); }
+    .gallery-strip { grid-template-columns:1fr; }
+    .gallery-item { aspect-ratio:16/9; }
+    .booking-container { padding:1rem 0.85rem; }
+    .step-nav { gap:0.5rem; }
+    .btn-step { padding:0.85rem 1.2rem; font-size:0.6rem; }
+    .form-group input, .form-group textarea { padding:0.8rem; font-size:1rem; }
+    section { padding:3.5rem 1.2rem; }
+    .location-map { min-height:260px; }
+    .location-map iframe { min-height:260px; }
+  }
+  @media (max-width:400px) {
+    .barber-select-grid { grid-template-columns:1fr; }
+    .hero-ornament .line { width:30px; }
+    .about-stats { flex-wrap:wrap; gap:1.2rem 2rem; }
+    section { padding:3rem 1rem; }
+    .booking-container { padding:0.85rem 0.7rem; }
   }
 </style>
 </head>
@@ -288,8 +347,7 @@
 <!-- NAV -->
 <nav id="mainNav">
   <a href="#" class="nav-logo">
-    <span class="logo-word">CLASSY</span>
-    <span class="logo-sub">· Barber &amp; Academy Salon ·</span>
+    <img src="logo.png" alt="Classy Barber Logo">
   </a>
   <ul class="nav-links">
     <li><a href="#about" data-key="nav_about">За нас</a></li>
@@ -304,24 +362,35 @@
       <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
     </div>
     <a href="#booking" class="nav-cta" data-key="nav_book">Резервирай</a>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="#about" data-key="nav_about" onclick="toggleMenu()">За нас</a>
+  <a href="#services" data-key="nav_services" onclick="toggleMenu()">Услуги</a>
+  <a href="#booking" data-key="nav_barbers" onclick="toggleMenu()">Бръснари</a>
+  <a href="#gallery" data-key="nav_gallery" onclick="toggleMenu()">Галерия</a>
+  <a href="#location" data-key="nav_location" onclick="toggleMenu()">Локация</a>
+  <a href="#booking" class="mobile-book" data-key="nav_book" onclick="toggleMenu()">Резервирай</a>
+</div>
 
 <!-- HERO -->
 <section id="hero">
   <div class="hero-bg"></div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
-    <div class="hero-logo-img">
-      <img src="Logo.jpg" alt="Classy Logo" style="mix-blend-mode:multiply;" onerror="this.src='logo.webp';this.style.mixBlendMode='normal';">
-    </div>
+
     <div class="hero-ornament">
       <div class="line"></div>
       <span data-key="hero_est">Основана 2024 · София, България</span>
       <div class="line"></div>
     </div>
     <h1 class="hero-title"><span class="gold">C</span>LASSY</h1>
-    <p class="hero-subtitle" data-key="hero_sub">Барбершоп &amp; Академия Салон</p>
+    <p class="hero-subtitle" data-key="hero_sub">Barbershop &amp; Academy Salon</p>
     <div class="hero-ctas">
       <a href="#booking" class="btn-primary" data-key="hero_cta1">Запази час</a>
       <a href="#services" class="btn-outline" data-key="hero_cta2">Нашите услуги</a>
@@ -342,12 +411,12 @@
   <div class="about-text">
     <div class="section-label"><div class="s-line"></div><span data-key="about_label">Нашата история</span></div>
     <h2 class="section-title" data-key="about_title">Там където майсторството<br>среща <em>елегантността</em></h2>
-    <p data-key="about_p1">Classy Barber &amp; Beauty Salon е роден от една единствена визия — да създадем пространство, в което всеки клиент напуска не само с перфектен вид, но и с усещане за него. Съчетаваме традициите на класическото бръснарство с модерния стил.</p>
+    <p data-key="about_p1">Classy Barber &amp; Academy Salon е роден от една единствена визия — да създадем пространство, в което всеки клиент напуска не само с перфектен вид, но и с усещане за него. Съчетаваме традициите на класическото бръснарство с модерния стил.</p>
     <p data-key="about_p2">Намиращ се в сърцето на София, нашият салон е убежище на изтънченост. Всяко подстригване, всяко бръснене, всяка процедура се извършва с изключително внимание към детайла от нашия екип от майстори.</p>
     <div class="about-stats">
-      <div class="stat"><span class="stat-num">6</span><span class="stat-label" data-key="stat1">Майстори</span></div>
-      <div class="stat"><span class="stat-num">500+</span><span class="stat-label" data-key="stat2">Доволни клиенти</span></div>
-      <div class="stat"><span class="stat-num">5★</span><span class="stat-label" data-key="stat3">Рейтинг</span></div>
+      <div class="stat"><span class="stat-num">6</span><span class="stat-label" data-key="stat1">Бръснари</span></div>
+      <div class="stat"><span class="stat-num">2</span><span class="stat-label" data-key="stat2">Майстори</span></div>
+      <div class="stat"><span class="stat-num">500+</span><span class="stat-label" data-key="stat3">Клиенти</span></div>
     </div>
   </div>
 </section>
@@ -361,31 +430,27 @@
       <svg class="service-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879M12 12L9.121 9.121m0 5.758a3 3 0 10-4.243 4.243 3 3 0 004.243-4.243zm0-5.758a3 3 0 10-4.243-4.243 3 3 0 004.243 4.243z"/></svg>
       <div class="service-name" data-key="s1_name">Класическо подстригване</div>
       <div class="service-desc" data-key="s1_desc">Безвременна прическа, адаптирана към формата на лицето и стила ви. Включва измиване, подстригване и оформяне с премиум продукти.</div>
-      <div class="service-dur" data-key="s1_dur">45 минути</div>
     </div>
     <div class="service-card">
       <svg class="service-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
       <div class="service-name" data-key="s2_name">Оформяне на брада</div>
       <div class="service-desc" data-key="s2_desc">Експертно оформяне, подстригване и горещо хавлиено третиране на брадата. Напуснете с брада, която перфектно оформя лицето ви.</div>
-      <div class="service-dur" data-key="s2_dur">30 минути</div>
     </div>
     <div class="service-card">
       <svg class="service-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
       <div class="service-name" data-key="s3_name">Боядисване на коса</div>
       <div class="service-desc" data-key="s3_desc">От фини хайлайти до смели трансформации. Използваме професионална боя за трайни, ярки резултати.</div>
-      <div class="service-dur" data-key="s3_dur">60 минути</div>
     </div>
     <div class="service-card">
       <svg class="service-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
       <div class="service-name" data-key="s4_name">Детско подстригване</div>
       <div class="service-desc" data-key="s4_desc">Внимателна и търпелива услуга за малките ни клиенти. Правим първите им посещения в барбершопа удобни и приятни.</div>
-      <div class="service-dur" data-key="s4_dur">30 минути</div>
     </div>
     <div class="service-card">
       <svg class="service-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
       <div class="service-name" data-key="s5_name">Маникюр</div>
       <div class="service-desc" data-key="s5_desc">Професионална грижа за ноктите и ръцете. Оформяне, полиране и поддръжка от наш специалист по маникюр.</div>
-      <div class="service-dur" data-key="s5_dur">45 минути</div>
+      <div class="service-badge" data-key="s5_badge">Само на място / По запитване</div>
     </div>
   </div>
 </section>
@@ -510,7 +575,7 @@
         <svg class="loc-icon" width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
         <div class="loc-text">
           <strong data-key="loc_hours_label">Работно време</strong>
-          <span data-key="loc_hours">Пон – Пет: 09:00 – 20:00<br>Събота: 09:00 – 18:00<br>Неделя: Почивен ден</span>
+          <span data-key="loc_hours">Пон – Пет: 10:00 – 19:00<br>Събота: 10:00 – 19:00<br>Неделя: Почивен ден</span>
         </div>
       </div>
       <div class="loc-row">
@@ -562,7 +627,7 @@
       <li><a href="#booking" data-key="s2_name">Оформяне на брада</a></li>
       <li><a href="#booking" data-key="s3_name">Боядисване на коса</a></li>
       <li><a href="#booking" data-key="s4_name">Детско подстригване</a></li>
-      <li><a href="#booking" data-key="s5_name">Маникюр</a></li>
+      <li><a href="#services" data-key="s5_name">Маникюр</a></li>
     </ul>
   </div>
   <div class="footer-col">
@@ -575,7 +640,7 @@
   </div>
 </footer>
 <div class="footer-bottom">
-  <p data-key="copyright">© 2024 Classy Barber &amp; Beauty Salon. Всички права запазени.</p>
+  <p data-key="copyright">© 2024 Classy Barber &amp; Academy Salon. Всички права запазени.</p>
   <p style="color:var(--gold)">Sofia, Bulgaria</p>
 </div>
 
@@ -595,12 +660,12 @@
 // Keep these IDs/slugs in sync with lib/catalog.js. The Cal.com event-type
 // slug for each service MUST match the `slug` value below.
 // ════════════════════════════════════════════════════════════════════
+// Bookable services only — manicure is marketing-only and must NOT appear here.
 const SERVICES = {
   "classic-haircut": { bg:"Класическо подстригване", en:"Classic Haircut",  durBg:"45 мин", durEn:"45 min" },
   "beard-grooming":  { bg:"Оформяне на брада",        en:"Beard Grooming",   durBg:"30 мин", durEn:"30 min" },
   "hair-coloring":   { bg:"Боядисване на коса",       en:"Hair Coloring",    durBg:"60 мин", durEn:"60 min" },
   "kids-haircut":    { bg:"Детско подстригване",      en:"Kids' Cut",        durBg:"30 мин", durEn:"30 min" },
-  "manicure":        { bg:"Маникюр",                  en:"Manicure",         durBg:"45 мин", durEn:"45 min" },
 };
 
 const BARBER_SVC = ["classic-haircut","beard-grooming","hair-coloring","kids-haircut"];
@@ -608,12 +673,12 @@ const BARBER_SVC = ["classic-haircut","beard-grooming","hair-coloring","kids-hai
 // id = catalog barberId (sent to the Netlify functions). live=true means Cal.com
 // is configured; placeholders still work once their username + event types exist.
 const PROVIDERS = [
-  { id:"osman",   initial:"ОА", initialEn:"OA", bg:"Осман А.",    en:"Osman A.",    roleBg:"Майстор бръснар", roleEn:"Master Barber",  specBg:"Подстригване · Брада · Боядисване", specEn:"Haircut · Beard · Coloring", services:BARBER_SVC, live:true },
-  { id:"barber2", initial:"Б2", initialEn:"B2", bg:"Бръснар 2",   en:"Barber 2",    roleBg:"Майстор бръснар", roleEn:"Master Barber",  specBg:"Подстригване · Брада", specEn:"Haircut · Beard", services:BARBER_SVC, live:false },
-  { id:"barber3", initial:"Б3", initialEn:"B3", bg:"Бръснар 3",   en:"Barber 3",    roleBg:"Майстор бръснар", roleEn:"Master Barber",  specBg:"Подстригване · Брада", specEn:"Haircut · Beard", services:BARBER_SVC, live:false },
-  { id:"barber4", initial:"Б4", initialEn:"B4", bg:"Бръснар 4",   en:"Barber 4",    roleBg:"Майстор бръснар", roleEn:"Master Barber",  specBg:"Подстригване · Брада", specEn:"Haircut · Beard", services:BARBER_SVC, live:false },
-  { id:"barber5", initial:"Б5", initialEn:"B5", bg:"Бръснар 5",   en:"Barber 5",    roleBg:"Майстор бръснар", roleEn:"Master Barber",  specBg:"Подстригване · Брада", specEn:"Haircut · Beard", services:BARBER_SVC, live:false },
-  { id:"nails",   initial:"М",  initialEn:"N",  bg:"Маникюрист",  en:"Nail Specialist", roleBg:"Нокти & Маникюр", roleEn:"Nails & Manicure", specBg:"Маникюр", specEn:"Manicure", services:["manicure"], live:false },
+  { id:"osman",   initial:"ОА", initialEn:"OA", bg:"Осман А.", en:"Osman A.", roleBg:"Майстор бръснар", roleEn:"Master Barber", specBg:"Подстригване · Брада · Боядисване", specEn:"Haircut · Beard · Coloring", services:BARBER_SVC, live:true },
+  { id:"barber2", initial:"Б2", initialEn:"B2", bg:"Бръснар 2", en:"Barber 2", roleBg:"Майстор бръснар", roleEn:"Master Barber", specBg:"Подстригване · Брада · Детско", specEn:"Haircut · Beard · Kids", services:BARBER_SVC, live:false },
+  { id:"barber3", initial:"Б3", initialEn:"B3", bg:"Бръснар 3", en:"Barber 3", roleBg:"Бръснар", roleEn:"Barber", specBg:"Подстригване · Брада", specEn:"Haircut · Beard", services:BARBER_SVC, live:false },
+  { id:"barber4", initial:"Б4", initialEn:"B4", bg:"Бръснар 4", en:"Barber 4", roleBg:"Бръснар", roleEn:"Barber", specBg:"Подстригване · Брада", specEn:"Haircut · Beard", services:BARBER_SVC, live:false },
+  { id:"barber5", initial:"Б5", initialEn:"B5", bg:"Бръснар 5", en:"Barber 5", roleBg:"Бръснар", roleEn:"Barber", specBg:"Подстригване · Брада", specEn:"Haircut · Beard", services:BARBER_SVC, live:false },
+  { id:"barber6", initial:"Б6", initialEn:"B6", bg:"Бръснар 6", en:"Barber 6", roleBg:"Бръснар", roleEn:"Barber", specBg:"Подстригване · Брада", specEn:"Haircut · Beard", services:BARBER_SVC, live:false },
 ];
 
 // ════════════════════════════════════════════════════════════════════
@@ -628,15 +693,16 @@ const T = {
     hero_cta1:'Запази час', hero_cta2:'Нашите услуги', scroll:'Скрол',
     about_label:'Нашата история',
     about_title:'Там където майсторството<br>среща <em>елегантността</em>',
-    about_p1:'Classy Barber & Beauty Salon е роден от една единствена визия — да създадем пространство, в което всеки клиент напуска не само с перфектен вид, но и с усещане за него. Съчетаваме традициите на класическото бръснарство с модерния стил.',
+    about_p1:'Classy Barber & Academy Salon е роден от една единствена визия — да създадем пространство, в което всеки клиент напуска не само с перфектен вид, но и с усещане за него. Съчетаваме традициите на класическото бръснарство с модерния стил.',
     about_p2:'Намиращ се в сърцето на София, нашият салон е убежище на изтънченост. Всяко подстригване, всяко бръснене, всяка процедура се извършва с изключително внимание към детайла от нашия екип от майстори.',
-    stat1:'Майстори', stat2:'Доволни клиенти', stat3:'Рейтинг',
+    stat1:'Бръснари', stat2:'Майстори', stat3:'Клиенти',
     services_label:'Какво предлагаме', services_title:'Нашите услуги',
     s1_name:'Класическо подстригване', s1_desc:'Безвременна прическа, адаптирана към формата на лицето и стила ви. Включва измиване, подстригване и оформяне с премиум продукти.', s1_dur:'45 минути',
     s2_name:'Оформяне на брада', s2_desc:'Експертно оформяне, подстригване и горещо хавлиено третиране на брадата. Напуснете с брада, която перфектно оформя лицето ви.', s2_dur:'30 минути',
     s3_name:'Боядисване на коса', s3_desc:'От фини хайлайти до смели трансформации. Използваме професионална боя за трайни, ярки резултати.', s3_dur:'60 минути',
     s4_name:'Детско подстригване', s4_desc:'Внимателна и търпелива услуга за малките ни клиенти. Правим първите им посещения в барбершопа удобни и приятни.', s4_dur:'30 минути',
     s5_name:'Маникюр', s5_desc:'Професионална грижа за ноктите и ръцете. Оформяне, полиране и поддръжка от наш специалист по маникюр.', s5_dur:'45 минути',
+    s5_badge:'Само на място / По запитване',
     book_label:'Запознайте се с екипа · Резервации', book_title:'Запазете своя час',
     book_intro:'Изберете своя майстор, услугата и удобен за вас час. Наличността е в реално време, синхронизирана с календара на всеки специалист.',
     step1:'Бръснар', step2:'Услуга', step3:'Дата и час', step4:'Потвърждение',
@@ -651,12 +717,12 @@ const T = {
     loc_label:'Намерете ни', loc_title:'Посетете салона',
     loc_desc:'Намираме се удобно в центъра на София. Walk-in клиентите са добре дошли, но препоръчваме предварителна резервация, за да осигурите желания специалист и час.',
     loc_addr_label:'Адрес', loc_addr:'ул. „Тинтява" 84, 1113 София',
-    loc_hours_label:'Работно време', loc_hours:'Пон – Пет: 09:00 – 20:00<br>Събота: 09:00 – 18:00<br>Неделя: Почивен ден',
+    loc_hours_label:'Работно време', loc_hours:'Пон – Пет: 10:00 – 19:00<br>Събота: 10:00 – 19:00<br>Неделя: Почивен ден',
     loc_phone_label:'Телефон', loc_phone:'+359 · · · · · · · · ·<br><em style="color:var(--gold);font-style:normal;font-size:0.75rem">Обновете с вашия телефон</em>',
     loc_email_label:'Имейл',
     footer_desc:'Убежище на стила и изтънчеността в сърцето на София. Вярваме, че всеки клиент заслужава най-доброто изживяване при грижата за себе си.',
     footer_nav:'Навигация', footer_services:'Услуги', footer_follow:'Последвайте ни',
-    copyright:'© 2024 Classy Barber & Beauty Salon. Всички права запазени.',
+    copyright:'© 2024 Classy Barber & Academy Salon. Всички права запазени.',
     modal_title:'Резервацията е потвърдена!', modal_btn:'Перфектно, Благодаря!',
     modal_msg_tpl:'Здравей {name}! Резервацията ти при {barber} за {service} на {date} в {time} е потвърдена. Очакваме те в Classy!',
     modal_msg_email:'Изпратихме потвърждение на {email}.',
@@ -676,15 +742,16 @@ const T = {
     hero_cta1:'Reserve Your Chair', hero_cta2:'Our Services', scroll:'Scroll',
     about_label:'Our Story',
     about_title:'Where Craft Meets<br><em>Elegance</em>',
-    about_p1:'Classy Barber & Beauty Salon was born from a singular vision — to create a space where every client leaves not just looking their best, but feeling it. We blend old-world barbering traditions with contemporary style.',
+    about_p1:'Classy Barber & Academy Salon was born from a singular vision — to create a space where every client leaves not just looking their best, but feeling it. We blend old-world barbering traditions with contemporary style.',
     about_p2:'Set in the heart of Sofia, our salon is a sanctuary of refinement. Every cut, every shave, every treatment is delivered with obsessive attention to detail by our team of masters.',
-    stat1:'Masters', stat2:'Happy Clients', stat3:'Rating',
+    stat1:'Barbers', stat2:'Masters', stat3:'Clients',
     services_label:'What We Offer', services_title:'Our Services',
     s1_name:'Classic Haircut', s1_desc:'A timeless cut tailored to your face shape and style. Includes wash, cut and styling with premium products.', s1_dur:'45 minutes',
     s2_name:'Beard Grooming', s2_desc:'Expert beard shaping, trimming and hot-towel treatment. Leave with a beard that frames your face perfectly.', s2_dur:'30 minutes',
     s3_name:'Hair Coloring', s3_desc:'From subtle highlights to bold transformations. We use professional-grade color for lasting, vibrant results.', s3_dur:'60 minutes',
     s4_name:"Kids' Cut", s4_desc:'A gentle, patient service for young clients. We make their first barbershop visits comfortable and fun.', s4_dur:'30 minutes',
     s5_name:'Manicure', s5_desc:'Professional nail and hand care. Shaping, buffing and maintenance by our dedicated manicure specialist.', s5_dur:'45 minutes',
+    s5_badge:'In salon only / By request',
     book_label:'Meet the Team · Reservations', book_title:'Book Your Appointment',
     book_intro:'Choose your specialist, the service and a time that suits you. Availability is live, synced with each specialist’s calendar.',
     step1:'Barber', step2:'Service', step3:'Date & Time', step4:'Confirm',
@@ -699,12 +766,12 @@ const T = {
     loc_label:'Find Us', loc_title:'Visit the Salon',
     loc_desc:'We are conveniently located in central Sofia. Walk-ins are welcome, but we recommend booking in advance to secure your preferred specialist and time.',
     loc_addr_label:'Address', loc_addr:'84 Tintava St, 1113 Sofia, Bulgaria',
-    loc_hours_label:'Working Hours', loc_hours:'Mon – Fri: 09:00 – 20:00<br>Sat: 09:00 – 18:00<br>Sun: Closed',
+    loc_hours_label:'Working Hours', loc_hours:'Mon – Fri: 10:00 – 19:00<br>Sat: 10:00 – 19:00<br>Sun: Closed',
     loc_phone_label:'Phone', loc_phone:'+359 · · · · · · · · ·<br><em style="color:var(--gold);font-style:normal;font-size:0.75rem">Update with your phone</em>',
     loc_email_label:'Email',
     footer_desc:'A sanctuary of style and refinement in the heart of Sofia. We believe every client deserves the finest grooming experience.',
     footer_nav:'Navigate', footer_services:'Services', footer_follow:'Follow Us',
-    copyright:'© 2024 Classy Barber & Beauty Salon. All rights reserved.',
+    copyright:'© 2024 Classy Barber & Academy Salon. All rights reserved.',
     modal_title:'Booking Confirmed!', modal_btn:'Perfect, Thank You!',
     modal_msg_tpl:'Hi {name}! Your appointment with {barber} for {service} on {date} at {time} is confirmed. See you at Classy!',
     modal_msg_email:'We have sent a confirmation to {email}.',
@@ -1000,6 +1067,15 @@ function closeModal(){
 }
 
 document.getElementById('successModal').addEventListener('click',function(e){ if(e.target===this) closeModal(); });
+
+// ── MOBILE MENU ──
+function toggleMenu() {
+  const nav = document.getElementById('mainNav');
+  const menu = document.getElementById('mobileNav');
+  nav.classList.toggle('menu-open');
+  menu.classList.toggle('active');
+  document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : '';
+}
 
 // ── INIT ──
 renderBarbers();

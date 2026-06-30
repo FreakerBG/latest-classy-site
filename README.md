@@ -5,8 +5,8 @@ Single-page site (`index.html`) with an integrated 4-step booking widget powered
 **Cal.com API v2** via **Netlify Functions**.
 
 - **Booking engine:** Cal.com (same logic as the Osman test site)
-- **Providers:** 6 (Osman live; 4 barber placeholders; 1 manicure specialist)
-- **Services:** Classic Haircut, Beard Grooming, Hair Coloring, Kids' Cut, Manicure (no prices shown)
+- **Providers:** 6 barbers (Osman + Barber 2 = Master Barbers; Barbers 3-6 = Barbers). Osman is live; others are placeholders.
+- **Services:** 5 visible in the Services section. 4 are bookable online (Classic Haircut, Beard Grooming, Hair Coloring, Kids' Cut). Manicure is visible as a marketing card only — not bookable online.
 - **Languages:** Bulgarian / English toggle
 
 ## Structure
